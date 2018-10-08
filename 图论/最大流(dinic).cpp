@@ -1,58 +1,61 @@
 /*
-    Îñ±ØÀÎ¼Ç£ºÖØĞÂ½¨Í¼µÄÊ±ºòcnt=1£¡£¡£¡²»ÊÇ0£¡
-*/
-#define S 0
-#define T (n+1)
-#define N 1010
-#define M 100010
-#define inf 0x3f3f3f3f		//Èç¹ûÖØ¸´¶¨Òå¿É×¢ÊÍ
-struct edge{int to,next,v;}e[M];
-int head[N],cnt;
-inline void ins(int u,int v,int w)
-{
-    e[++cnt].to=v;
-    e[cnt].next=head[u];
-    e[cnt].v=w;
-    head[u]=cnt;
+ * ç‚¹æ•° Nï¼Œè¾¹æ•° maxnï¼ŒINF=0x3f3f3f3fï¼Œæ³¨æ„å›¾æ˜¯å•å‘è¾¹è¿˜æ˜¯åŒå‘è¾¹
+ * å°æ•°æµé‡è®°å¾—åŠ eps
+ */
+struct Edge {
+	int to, cap, next;
+} E[maxn];
+int head[N], pa[N], vis[N], cnt;
+void init() {
+	memset(head, -1, sizeof head);
+	cnt = 0;
 }
-inline void insert(int u,int v,int w)
-{
-    ins(u,v,w);
-    ins(v,u,0);
+void addedge(int u, int v, int w) {
+	E[cnt].to = v; E[cnt].cap = w; E[cnt].next = head[u]; head[u] = cnt++;
+	E[cnt].to = u; E[cnt].cap = 0; E[cnt].next = head[v]; head[v] = cnt++; // 0 or w
 }
-int h[N],q[N],tot;
-inline bool bfs()
-{
-    memset(h,-1,sizeof(h));
-    int t=0,w=1;
-    q[0]=S;h[S]=0;
-    while (t!=w)
-    {
-        int now=q[t++];if (t==N)t=0;
-        for (int i=head[now];i;i=e[i].next)
-            if (e[i].v&&h[e[i].to]==-1)
-            {
-                h[e[i].to]=h[now]+1;
-                q[w++]=e[i].to;
-                if (w==N)w=0;
-            }
-    }
-    return h[T]!=-1;
+bool bfs(int s, int t) {
+	memset(vis, -1, sizeof vis);
+	queue<int> q;
+	vis[s] = 0;
+	q.push(s);
+	while (!q.empty()) {
+		int u = q.front();
+		q.pop();
+		for (int i = head[u]; i != -1; i = E[i].next) {
+			int v = E[i].to;
+			if (E[i].cap && vis[v] == -1) {
+				vis[v] = vis[u] + 1;
+				q.push(v);
+			}
+		}
+	}
+	return vis[t] != -1;
 }
-inline int dfs(int x,int f)
-{
-    if (x==T||!f)return f;
-    int w,used=0;
-    for (int i=head[x];i;i=e[i].next)
-        if (h[e[i].to]==h[x]+1&&e[i].v)
-        {
-            w=dfs(e[i].to,min(e[i].v,f-used));
-            e[i].v-=w;
-            e[i^1].v+=w;
-            used+=w;
-            if (used==f)return f;
-        }
-    if (!used)h[x]=-1;
-    return used;
+int dfs(int u, int t, int flow) {
+	if (u == t) return flow;
+	for (int &i = pa[u]; i != -1; i = E[i].next) {
+		int v = E[i].to;
+		if (E[i].cap && vis[v] == vis[u] + 1) {
+			int res = dfs(v, t, min(flow, E[i].cap));
+			if (res) {
+				E[i].cap -= res;
+				E[i ^ 1].cap += res;
+				return res;
+			} 
+		}
+	}
+	return 0;
 }
-inline void dinic(){tot=0;while (bfs())tot+=dfs(S,inf);}
+int Dinic(int s, int t) {
+	int max_flow = 0;
+	while (bfs(s, t)) {
+		memcpy(pa, head, sizeof head);
+		int res;
+		do {
+			res = dfs(s, t, INF);
+			max_flow += res;
+		} while (res);
+	}
+	return max_flow;
+}

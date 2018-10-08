@@ -1,56 +1,69 @@
-struct edge{int to,next,v,c,from;}e[100*N];
-int head[N],dist[N],q[N],from[N];
-bool mrk[N];
-int n,m,cnt=1,ans;
-inline void ins(int u,int v,int w,int c)
-{
-    e[++cnt].to=v;
-    e[cnt].v=w;
-    e[cnt].c=c;
-    e[cnt].from=u;
-    e[cnt].next=head[u];
-    head[u]=cnt;
-}
-inline void insert(int u,int v,int w,int c)
-{
-    ins(u,v,w,c);
-    ins(v,u,0,-c);
-}
-inline bool spfa()
-{
-    for (int i=0;i<=T;i++)dist[i]=inf;
-    int t=0,w=1;
-    dist[S]=0;q[0]=S;mrk[S]=1;
-    while (t!=w)
-    {
-        int now=q[t++];if (t==N-1)t=0;
-        for (int i=head[now];i;i=e[i].next)
-            if (e[i].v&&dist[now]+e[i].c<dist[e[i].to])
-            {
-                dist[e[i].to]=dist[now]+e[i].c;
-                from[e[i].to]=i;
-                if (!mrk[e[i].to])
-                {
-                    mrk[e[i].to]=1;
-                    q[w++]=e[i].to;
-                    if (w==N-1)w=0;
-                }
-            }
-        mrk[now]=0;
-    }
-    return dist[T]!=inf;
-}
-inline void mcf()
-{
-    int x=inf;
-    for (int i=from[T];i;i=from[e[i].from])
-        x=min(x,e[i].v);
-    for (int i=from[T];i;i=from[e[i].from])
-    {
-        e[i].v-=x;
-        e[i^1].v+=x;
-        ans+=x*e[i].c;
-    }
-}
-while (spfa())mcf();
-printf("%d\n",ans);
+struct Edge {
+	int from, to, cap, flow, cost;
+	Edge(int a, int b, int c, int d, int E) { from = a; to = b; cap = c; flow = d; cost = E; }
+};
+class MCMF {
+public:
+#define max_V 202
+	int n, m, s, t;
+	vector<Edge> edges;
+	vector<int> g[max_V];
+	bool vis[max_V];
+	int d[max_V], p[max_V], a[max_V];
+
+	void Init(int n) {
+		this->n = n;
+		rep(i, 0, n) g[i].clear();
+		edges.clear();
+	}
+
+	void Addedge(int u, int v, int c, int w) {
+		edges.pb(Edge(u, v, c, 0, w));
+		edges.pb(Edge(v, u, 0, 0, -w));
+		int m = SZ(edges);
+		g[u].pb(m - 2);
+		g[v].pb(m - 1);
+	}
+
+	bool Spfa(int s, int t, int &flow, int &cost) {
+		fill(d, d + n, INF);
+		memset(vis, 0, sizeof vis);
+		d[s] = 0; vis[s] = 1; p[s] = 0; a[s] = INF;
+		queue<int> q;
+		q.push(s);
+		while (!q.empty()) {
+			int u = q.front(); q.pop();
+			vis[u] = 0;
+			int sz = SZ(g[u]);
+			rep(i, 0, sz) {
+				Edge& E = edges[g[u][i]];
+				if (E.cap > E.flow && d[E.to] > d[u] + E.cost) {
+					d[E.to] = d[u] + E.cost;
+					p[E.to] = g[u][i];
+					a[E.to] = min(a[u], E.cap - E.flow);
+					if (!vis[E.to]) {
+						vis[E.to] = 1;
+						q.push(E.to);
+					}
+				}
+			}
+		}
+		if (d[t] == INF) return 0;
+		flow += a[t];
+		cost += d[t] * a[t];
+		int u = t;
+		while (u != s) {
+			edges[p[u]].flow += a[t];
+			edges[p[u] ^ 1].flow -= a[t];
+			u = edges[p[u]].from;
+		}
+		return 1;
+	}
+
+	int MincostMaxflow(int s, int t) {
+		int flow = 0, cost = 0;
+		while (Spfa(s, t, flow, cost));
+		return cost;
+	}
+#undef max_V
+};
