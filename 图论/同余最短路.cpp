@@ -1,12 +1,10 @@
-using namespace std;
+/* 例题：一张无向图每条边可以多次经过问s到t的不小于k的最短路
+ * 解法：对于终点的边取最短的边w 然后对%2w跑同余最短路
+ */
 typedef long long LL; 
 const int N=1000010; 
 const int maxn = 100005;
 const LL INF=0x3f3f3f3f3f3f3f3f; 
-/*
-    一张无向图每条边可以多次经过问s到t的不小于k的最短路
-    对于终点的边取最短的边w 然后对%2w跑同余最短路
-*/
 typedef pair<LL,int>seg; 
 priority_queue<seg,vector<seg>,greater<seg> >q;    
 int stu[N],u[N],vto[N],w[N],nxt[N],n,m,tot=0;

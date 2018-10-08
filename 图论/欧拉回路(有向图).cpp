@@ -1,5 +1,4 @@
-/*
- * 例题：POJ 2337 - 给出n 个小写字母组成的单词，要求将n 个单词连接起来，使得前一个单词的最后一个字母
+/* 例题：POJ 2337 - 给出n 个小写字母组成的单词，要求将n 个单词连接起来，使得前一个单词的最后一个字母
 和后一个单词的第一个字母相同。输出字典序最小的解。
  */
 struct Edge {
@@ -36,8 +35,7 @@ int main() {
     scanf("%d", &T);
     while(T−−) {
         scanf("%d", &n);
-        for(int i = 0; i < n; i++)
-            cin >> str[i];
+        for(int i = 0; i < n; i++) cin >> str[i];
         sort(str, str + n); //要输出字典序最小的解，先按照字典序排序
         init();
         memset(in, 0, sizeof(in));
@@ -57,10 +55,8 @@ int main() {
             if(out[i] − in[i] == 1) {
                 cc1++;
                 start = i;//如果有一个出度比入度大1 的点，就从这个点出发，否则从最小的点出发
-            } else if(out[i] − in[i] == −1)
-                cc2++;
-            else if(out[i] − in[i] != 0)
-                cc1 = 3;
+            } else if(out[i] − in[i] == −1) cc2++;
+            else if(out[i] − in[i] != 0) cc1 = 3;
         }
         if(! ( (cc1 == 0 && cc2 == 0) || (cc1 == 1 && cc2 == 1) )) {
             printf("***\n");

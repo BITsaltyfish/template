@@ -95,12 +95,9 @@ int main() {
         }
         bool flag = true;
         for(int i = 1; i <= n; i++) {
-            if(out[i] − in[i] > 0)
-                addedge(0, i, (out[i] − in[i]) / 2);
-            else if(in[i] − out[i] > 0)
-                addedge(i, n + 1, (in[i] − out[i]) / 2);
-            if((out[i] − in[i]) & 1)
-                flag = false;
+            if(out[i] − in[i] > 0) addedge(0, i, (out[i] − in[i]) / 2);
+            else if(in[i] − out[i] > 0) addedge(i, n + 1, (in[i] − out[i]) / 2);
+            if((out[i] − in[i]) & 1) flag = false;
         }
         if(!flag) {
             printf("impossible\n");

@@ -107,19 +107,15 @@ struct chain {
         if(p) {
             if(x == CHANGEU)val[x] ^= 1;
             if(val[x]) {
-                tnum[p] − = (long long)nde[1].r0 * (num0[p]−nde[1].r1)
-                              ;
-                tnum[p] − = (long long)nde[1].r1 * (num1[p]−nde[1].r0)
-                              ;
-                num0[p] − = nde[1].r1;
-                num1[p] − = nde[1].r0;
+                tnum[p] −= (long long)nde[1].r0 * (num0[p]−nde[1].r1);
+                tnum[p] −= (long long)nde[1].r1 * (num1[p]−nde[1].r0);
+                num0[p] −= nde[1].r1;
+                num1[p] −= nde[1].r0;
             } else {
-                tnum[p] − = (long long)nde[1].r1 * (num0[p]−nde[1].r0)
-                              ;
-                tnum[p] − = (long long)nde[1].r0 * (num1[p]−nde[1].r1)
-                              ;
-                num0[p] − = nde[1].r0;
-                num1[p] − = nde[1].r1;
+                tnum[p] −= (long long)nde[1].r1 * (num0[p]−nde[1].r0);
+                tnum[p] −= (long long)nde[1].r0 * (num1[p]−nde[1].r1);
+                num0[p] −= nde[1].r0;
+                num1[p] −= nde[1].r1;
             }
             if(x == CHANGEU)val[x] ^= 1;
         }

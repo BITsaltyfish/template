@@ -1,5 +1,4 @@
-/*
- * 不要在函数里或者main里开Treap<int>T,开不下 放全局的
+/* 不要在函数里或者main里开Treap<int>T,开不下 放全局的
  * T.clear()清空
  * T.insert(x)插入
  * T.del(x)删除，没有成功删除返回false

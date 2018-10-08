@@ -52,7 +52,6 @@ struct ZKW_MinCostMaxFlow {
             if(vis[i]) {
                 vis[i] = false;
                 dis[i] += d;
-
             }
         return true;
     }

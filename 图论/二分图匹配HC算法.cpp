@@ -1,7 +1,6 @@
-/*
-[LightOJ-1356] - 最大点独立集+素数筛
-Hopcroft-Carp算法适用于点集稠密的二分图，相较于匈牙利更有优势
-*/
+/* [LightOJ-1356] - 最大点独立集+素数筛
+ * Hopcroft-Carp算法适用于点集稠密的二分图，相较于匈牙利更有优势
+ */
 #include <bits/stdc++.h>
 using namespace std;
 const int maxn = 4e4 + 5;

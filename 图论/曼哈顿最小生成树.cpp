@@ -5,7 +5,7 @@ struct Point {
 } p[MAXN];
 bool cmp(Point a, Point b) {
     if(a.x != b.x) return a.x < b.x;
-    else return a.y < b.y;
+    return a.y < b.y;
 }
 //树状数组，找y-x 大于当前的，但是y+x 最小的
 struct BIT {
