@@ -1,4 +1,4 @@
-// a对模MOD的逆元,无解返回-1
+// a瀵规āMOD鐨勯�嗗厓,鏃犺В杩斿洖-1
 ll exgcd(ll a, ll b, ll &x, ll &y) {
     ll d = a;
     if(b != 0)d = exgcd(b, a % b, y, x), y -= (a / b) * x;

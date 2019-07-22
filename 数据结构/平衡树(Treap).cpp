@@ -1,16 +1,16 @@
-/* ²»ÒªÔÚº¯ÊıÀï»òÕßmainÀï¿ªTreap<int>T,¿ª²»ÏÂ ·ÅÈ«¾ÖµÄ
- * T.clear()Çå¿Õ
- * T.insert(x)²åÈë
- * T.del(x)É¾³ı£¬Ã»ÓĞ³É¹¦É¾³ı·µ»Øfalse
- * T.pred(x)·µ»ØµÚÒ»¸öĞ¡ÓÚxµÄÊı£¬T.pred(x+1)·µ»ØµÚÒ»¸öĞ¡µÈÓÚxµÄÊı
- * T.succ(x)·µ»ØµÚÒ»¸ö´óÓÚxµÄÊı£¬T.succ(x-1)·µ»ØµÚÒ»¸ö´óµÈÓÚxµÄÊı
- * T.ask_kth(x)·µ»ØµÚxĞ¡µÄÊı
- * T.ask_rank(x)·µ»ØxµÄÅÅÃûÊÇµÚ¼¸Ğ¡
+/* ä¸è¦åœ¨å‡½æ•°é‡Œæˆ–è€…mainé‡Œå¼€Treap<int>T,å¼€ä¸ä¸‹ æ”¾å…¨å±€çš„
+ * T.clear()æ¸…ç©º
+ * T.insert(x)æ’å…¥
+ * T.del(x)åˆ é™¤ï¼Œæ²¡æœ‰æˆåŠŸåˆ é™¤è¿”å›false
+ * T.pred(x)è¿”å›ç¬¬ä¸€ä¸ªå°äºxçš„æ•°ï¼ŒT.pred(x+1)è¿”å›ç¬¬ä¸€ä¸ªå°ç­‰äºxçš„æ•°
+ * T.succ(x)è¿”å›ç¬¬ä¸€ä¸ªå¤§äºxçš„æ•°ï¼ŒT.succ(x-1)è¿”å›ç¬¬ä¸€ä¸ªå¤§ç­‰äºxçš„æ•°
+ * T.ask_kth(x)è¿”å›ç¬¬xå°çš„æ•°
+ * T.ask_rank(x)è¿”å›xçš„æ’åæ˜¯ç¬¬å‡ å°
  */
 template<class Tdata>
 class Treap {
 public:
-#define Treap_size 200010 /* ¼ÇµÃ¸ÄÕâ¸ö¶«Î÷ */
+#define Treap_size 200010 /* è®°å¾—æ”¹è¿™ä¸ªä¸œè¥¿ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ */
 #define NotFound (Tdata)-1
     struct treap_point {
         int l, r, rep, son, rnd;

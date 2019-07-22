@@ -1,6 +1,6 @@
-/* ÕÒ³öÒ»×éax+by==gcd(a,b)µÄ·½°¸£¬·µ»ØÖµ¼´gcd(a,b)
- * ax==1(mod b)µÈ¼ÛÓÚax-by==1
- * ¿ÉÄÜÐèÒªµ÷Õû½âxµ½×îÐ¡ÕýÊý
+/* æ‰¾å‡ºä¸€ç»„ax+by==gcd(a,b)çš„æ–¹æ¡ˆï¼Œè¿”å›žå€¼å³gcd(a,b)
+ * ax==1(mod b)ç­‰ä»·äºŽax-by==1
+ * å¯èƒ½éœ€è¦è°ƒæ•´è§£xåˆ°æœ€å°æ­£æ•°
  */
 ll exgcd(ll a, ll b, ll &x, ll &y) {
     ll d = a;

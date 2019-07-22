@@ -1,5 +1,5 @@
 /* codeforces 70D
- * ²Ù×÷Ò»£º²åÈëÒ»¸öµã ²Ù×÷¶ş£º²éÑ¯Ò»¸öµãÊÇ·ñÔÚÍ¹°üÄÚ
+ * æ“ä½œä¸€ï¼šæ’å…¥ä¸€ä¸ªç‚¹ æ“ä½œäºŒï¼šæŸ¥è¯¢ä¸€ä¸ªç‚¹æ˜¯å¦åœ¨å‡¸åŒ…å†…
  */
 #include <bits/stdc++.h>
 #define inf 0x3f3f3f3f
@@ -7,7 +7,7 @@ typedef long long ll;
 using namespace std;
 map<int,int> lower,upper;
 ll det(ll x1,ll y1,ll x2,ll y2,ll x3,ll y3){return x1*y2-x2*y1+x2*y3-x3*y2+x3*y1-x1*y3;}
-bool check(map<int,int> &A,int x,int y)//¼ì²é(x,y)ÊÇ·ñÔÚAÏÂÍ¹¿ÇÄÚ
+bool check(map<int,int> &A,int x,int y)//æ£€æŸ¥(x,y)æ˜¯å¦åœ¨Aä¸‹å‡¸å£³å†…
 {
 	auto it=A.lower_bound(x);
 	if (it==A.end())return false;

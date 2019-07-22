@@ -1,7 +1,7 @@
-/* ÖÊÒò×Ó·Ö½â£¬Ğ¡Êı¾İÓÃÉ¸·¨Ö±½ÓÅĞ£¬´óÊı¾İÓÃpollard_rho
- * factor[i]ÊÇº¬ÓĞ¶àÉÙ¸öÖÊÒò×Ói
- * map<ll,int>::iterator c,c->first±íÊ¾ÖÊÒò×Ó£¬c->second±íÊ¾´Î·½
- * wrk.out(p+1,q+1,len)¿ÉÒÔµ¼³ö·Ö½â½á¹û
+/* è´¨å› å­åˆ†è§£ï¼Œå°æ•°æ®ç”¨ç­›æ³•ç›´æ¥åˆ¤ï¼Œå¤§æ•°æ®ç”¨pollard_rho
+ * factor[i]æ˜¯å«æœ‰å¤šå°‘ä¸ªè´¨å› å­i
+ * map<ll,int>::iterator c,c->firstè¡¨ç¤ºè´¨å› å­ï¼Œc->secondè¡¨ç¤ºæ¬¡æ–¹
+ * wrk.out(p+1,q+1,len)å¯ä»¥å¯¼å‡ºåˆ†è§£ç»“æœ
  */
 #include <bits/stdc++.h>
 using namespace std;
@@ -60,7 +60,7 @@ struct get_factor {
         }
         return 1;
     }
-    bool Miller_Rabin(ll n) { //ÅĞ¶ÏnÊÇ·ñÎªËØÊı
+    bool Miller_Rabin(ll n) { //åˆ¤æ–­næ˜¯å¦ä¸ºç´ æ•°
         srand(time(0));
         if(n < 2)return 0;
         if(n == 2)return 1;
@@ -115,7 +115,7 @@ struct get_factor {
         factor.clear();
         Find_Factor(n);
     }
-    inline void out(ll *p, int *q, int &len) { //µ¼³öÖÊÒò×Ó·Ö½â½á¹û£¬pÊı×é·ÅÖÊÒò×Ó£¬qÊı×é·Å´ÎÊı£¬len´Ó1¿ªÊ¼
+    inline void out(ll *p, int *q, int &len) { //å¯¼å‡ºè´¨å› å­åˆ†è§£ç»“æœï¼Œpæ•°ç»„æ”¾è´¨å› å­ï¼Œqæ•°ç»„æ”¾æ¬¡æ•°ï¼Œlenä»1å¼€å§‹
         len = 0;
         for(map<ll, int>::iterator c = factor.begin(); c != factor.end();) {
             p[++len] = c->first;

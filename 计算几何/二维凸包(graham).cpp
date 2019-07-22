@@ -1,7 +1,7 @@
 /*
- * zhan°´Ë³Ê±Õë±£´æÁËÍ¹°üÉÏµÄµã±àºÅ,ÓĞtop¸ö
- * ËùÓĞµãµÄÏÂ±ê1¿ªÊ¼£¬Õ»ÖĞÒ²ÊÇÏÂ±ê1¿ªÊ¼
- * ×¢ÒâÖØ¸´µã£¡»áÓ°ÏìÍ¹ĞÎ
+ * zhanæŒ‰é¡ºæ—¶é’ˆä¿å­˜äº†å‡¸åŒ…ä¸Šçš„ç‚¹ç¼–å·,æœ‰topä¸ª
+ * æ‰€æœ‰ç‚¹çš„ä¸‹æ ‡1å¼€å§‹ï¼Œæ ˆä¸­ä¹Ÿæ˜¯ä¸‹æ ‡1å¼€å§‹
+ * æ³¨æ„é‡å¤ç‚¹ï¼ä¼šå½±å“å‡¸å½¢
 */
 #include <bits/stdc++.h>
 #define maxn 50010
@@ -28,10 +28,10 @@ struct point {
         return point(x - b.x, y - b.y);
     }
     inline data_type operator^(const point &b)const {
-        return x * b.y - y * b.x;   //²æ³Ë
+        return x * b.y - y * b.x;   //å‰ä¹˜
     }
     inline data_type operator*(const point &b)const {
-        return x * b.x - y * b.y;   //µã³Ë
+        return x * b.x - y * b.y;   //ç‚¹ä¹˜
     }
     inline bool operator<(const point &b)const {
         return x < b.x || x == b.x && y < b.y;
@@ -43,7 +43,7 @@ inline data_type sqr_dist(const point a, point b) {
 inline double dist(const point a, point b) {
     return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
 }
-inline bool jijiao_cmp(const point &a, const point &b) { //Ë³Ê±Õë
+inline bool jijiao_cmp(const point &a, const point &b) { //é¡ºæ—¶é’ˆ
     data_type tmp = (a - p[1]) ^ (b - p[1]);
     if (tmp < -eps)return 0;
     if (tmp > eps)return 1;
@@ -54,12 +54,12 @@ inline void graham(int n) {
     top = 0;
     for (int i = 2; i <= n; i++)if (p[i] < p[1])swap(p[i], p[1]);
     sort(p + 2, p + n + 1, jijiao_cmp);
-    for(int i = 1; i <= n; i++) { //Ä¬ÈÏÍ¹°ü±ß½çÖ±ÏßÉÏµÄµãÔÚÍ¹°üÉÏ£¬Èç¹û²»ÒªËã£¬'<'¸Ä'<='¼´¿É
+    for(int i = 1; i <= n; i++) { //é»˜è®¤å‡¸åŒ…è¾¹ç•Œç›´çº¿ä¸Šçš„ç‚¹åœ¨å‡¸åŒ…ä¸Šï¼Œå¦‚æœä¸è¦ç®—ï¼Œ'<'æ”¹'<='å³å¯
         while (top > 1 && ((p[zhan[top]] - p[zhan[top - 1]]) ^ (p[i] - p[zhan[top - 1]])) < 0)top--; 
         zhan[++top] = i;
     }
     int now = n - 1;
-    //Ä¬ÈÏÍ¹°ü±ß½çÖ±ÏßÉÏµÄµãÔÚÍ¹°üÉÏ£¬Òª¼ÓÕâÒ»¾ä
+    //é»˜è®¤å‡¸åŒ…è¾¹ç•Œç›´çº¿ä¸Šçš„ç‚¹åœ¨å‡¸åŒ…ä¸Šï¼Œè¦åŠ è¿™ä¸€å¥
     while (now >= 1 && ((p[now] - p[1]) ^ (p[zhan[top]] - p[1])) == 0)zhan[++top] = now--; 
 }
 int n;

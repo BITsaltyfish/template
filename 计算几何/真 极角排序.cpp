@@ -13,10 +13,10 @@ struct point {
         return point(x - b.x, y - b.y);
     }
     inline data_type operator^(const point &b)const {
-        return x * b.y - y * b.x;   //���
+        return x * b.y - y * b.x;   //叉乘
     }
     inline data_type operator*(const point &b)const {
-        return x * b.x - y * b.y;   //���
+        return x * b.x - y * b.y;   //点乘
     }
     inline bool      operator<(const point &b)const {
         return x < b.x || x == b.x && y < b.y;
@@ -38,9 +38,9 @@ inline int Quad(point a) {
 inline data_type cmp(const point &a, const point &b, const point &c) {
     return (b - a) ^ (c - a);
 }
-inline bool jijiao_cmp(const point &a, const point &b) { //˳ʱ��
+inline bool jijiao_cmp(const point &a, const point &b) { //以p[1]为原点，判断极坐标下a的极角比b小，即b在a的顺时针方向
     if (Quad(a - p[1]) != Quad(b - p[1]))return Quad(a - p[1]) < Quad(b - p[1]);
     data_type mmp = cmp(p[1], a, b);
-    if (mmp == 0)return sqr_dist(p[1], a) < sqr_dist(p[1], b);;
+    if (mmp == 0)return sqr_dist(p[1], a) < sqr_dist(p[1], b);
     return mmp > 0;
 }

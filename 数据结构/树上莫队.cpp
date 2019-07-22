@@ -1,4 +1,10 @@
-/*spoj COT2 ��ѯ����x-y·�����ж��ٲ�ͬ�����ֳ��ֹ�
+/* 先求出dfs序，要求每个点进入In_i和退出Out_i计算2次
+ * 对于路径(a,b)
+ * 若lca(a,b)==a或b，那么[In_a,Out_b]或[In_b,Out_a]中*只出现1次*的点都是路径上的点
+ * 若lca(a,b)!=a或b，那么" [In_a,Out_b]并上lca(a,b) "或" [In_b,Out_a]并上lca(a,b) "中*只出现1次*的点都是路径上的点
+ * 区别在于如果lca不是它们中的一个那么在集合中还要加上一个lca
+ * 注意在当前区间中的一个点出现次数如果是奇->偶，要消除点的影响。如果是偶->奇，要加入点的影响。
+ * spoj COT2 查询树上x-y路径上有多少不同的数字出现过
  */
 #include <bits/stdc++.h>
 typedef long long ll;

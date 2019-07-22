@@ -1,4 +1,4 @@
-#define data_type int // ¼ÇµÃ¸ÄÀàĞÍ£¡¼ÇµÃ¸ÄÀàĞÍ£¡¼ÇµÃ¸ÄÀàĞÍ£¡¼ÇµÃ¸ÄÀàĞÍ£¡¼ÇµÃ¸ÄÀàĞÍ£¡
+#define data_type int // è®°å¾—æ”¹ç±»å‹ï¼è®°å¾—æ”¹ç±»å‹ï¼è®°å¾—æ”¹ç±»å‹ï¼è®°å¾—æ”¹ç±»å‹ï¼è®°å¾—æ”¹ç±»å‹ï¼
 #define maxfft 131072+5
 const double pi = acos(-1.0);
 struct cp {
@@ -58,10 +58,10 @@ void fft(cp *x, int len, int sta) {
     }
     if(sta == -1)for(int i = 0; i < len; i++)x[i].a /= len, x[i].b /= len;
 }
-// ÆÕÍ¨FFT
+// æ™®é€šFFT
 cp x[maxfft], y[maxfft], z[maxfft];
 void FFT(data_type *a, data_type *b, int n, int m, data_type *c) {
-    // Ö±½Óµ÷ÓÃ£¬n,mÊÇa,bµÄ³¤¶È£¬ÏÂ±ê0¿ªÊ¼,cÊÇ¾í³öÀ´µÄ¶«Î÷
+    // ç›´æ¥è°ƒç”¨ï¼Œn,mæ˜¯a,bçš„é•¿åº¦ï¼Œä¸‹æ ‡0å¼€å§‹,cæ˜¯å·å‡ºæ¥çš„ä¸œè¥¿
     int i, j, len = 1;
     while(len < (n + m + 1) >> 1)len <<= 1;
     fft_init(len);
@@ -87,11 +87,11 @@ void FFT(data_type *a, data_type *b, int n, int m, data_type *c) {
         else c[i] = (data_type)(z[i >> 1].a + 0.5);
 }
 
-//Ä£Êı½Ï´óÊ±,×¢Òâdata_type=int || long long
+//æ¨¡æ•°è¾ƒå¤§æ—¶,æ³¨æ„data_type=int || long long
 cp x[maxfft], y[maxfft], z[maxfft];
 int temp[maxfft];
 void FFT(data_type *a, data_type *b, int n, int m, data_type *c) { 
-    //Ö±½Óµ÷ÓÃ£¬n,mÊÇa,bµÄ³¤¶È£¬ÏÂ±ê0¿ªÊ¼,cÊÇ¾í³öÀ´µÄ¶«Î÷
+    //ç›´æ¥è°ƒç”¨ï¼Œn,mæ˜¯a,bçš„é•¿åº¦ï¼Œä¸‹æ ‡0å¼€å§‹,cæ˜¯å·å‡ºæ¥çš„ä¸œè¥¿
     if(n <= 100 && m <= 100 || min(n, m) <= 5) {
         for(int i = 0; i < n + m - 1; i++)temp[i] = 0;
         for(int i = 0; i < n; i++)for(int j = 0; j < m; j++) {

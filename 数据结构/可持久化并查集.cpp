@@ -1,14 +1,14 @@
-/* �ɳ־û��߶���ά��fa���鼴�ɣ����Ⱥϲ����裬����ͬʱ����·��ѹ��������Ч��δ�ظ���
- * f=1 �ϲ�a,b���ڼ���
- * f=2 �ص���k�β���֮��״̬����ѯҲ�������
- * f=3 ѯ��(bool)ab����һ�����ϣ�
- * ע���ڴ棬����Ҫ�������߿�С��
+/* 可持久化线段树维护fa数组即可，按秩合并必需，可以同时加上路径压缩，但是效果未必更好
+ * f=1 合并a,b所在集合
+ * f=2 回到第k次操作之后状态（查询也算操作）
+ * f=3 询问(bool)ab属于一个集合？
+ * 注意内存，可能要开大点或者开小点
 */
 #include <bits/stdc++.h>
 typedef long long ll;
 using namespace std;
 struct segtree {
-    int lson, rson, fa, dep; //���Ҷ��ӣ����鼯��fa�����鼯�������������
+    int lson, rson, fa, dep; //左右儿子，并查集的fa，并查集集合内深度上限
 } t[200010 << 6];
 int root[200010], n, m, treesize;
 inline void modify(int &k, int old, int x, int y, int pos, int newfa) {
@@ -24,8 +24,8 @@ inline void modify(int &k, int old, int x, int y, int pos, int newfa) {
     if (!t[k].lson) t[k].lson = t[old].lson;
     if (!t[k].rson) t[k].rson = t[old].rson;
 }
-inline void force_modify(int &k, int old, int x, int y, int pos, int newfa) { //��������ǿ���¼�һ������û��·��ѹ������д
-    t[k = ++treesize] = (segtree) {0, 0, 0, 0};//����һ�и���
+inline void force_modify(int &k, int old, int x, int y, int pos, int newfa) { //区别在于强制新加一条链，没有路径压缩不用写
+    t[k = ++treesize] = (segtree) {0, 0, 0, 0};//就这一行改了
     if (x == y) {
         t[k].fa = newfa;
         t[k].dep = t[old].dep;
@@ -37,7 +37,7 @@ inline void force_modify(int &k, int old, int x, int y, int pos, int newfa) { //
     if (!t[k].lson) t[k].lson = t[old].lson;
     if (!t[k].rson) t[k].rson = t[old].rson;
 }
-inline int askpos(int &k, int x, int y, int pos) { //���ص������ϵĵ��Ŷ�����fa��ֵ
+inline int askpos(int &k, int x, int y, int pos) { //返回的是树上的点编号而不是fa的值
     if (x == y) return k;
     int mid = (x + y) >> 1;
     if (pos <= mid) return askpos(t[k].lson, x, mid, pos);
@@ -52,10 +52,10 @@ inline void adddep(int &k, int x, int y, int pos) {
     if (pos <= mid) adddep(t[k].lson, x, mid, pos);
     else adddep(t[k].rson, mid + 1, y, pos);
 }
-inline int getfa(int &nowroot, int x) { //���صĻ������ϵĵ��Ŷ��������ȱ��
+inline int getfa(int &nowroot, int x) { //返回的还是树上的点编号而不是祖先编号
     register int pos = askpos(nowroot, 1, n, x);
     if (t[pos].fa == x) return pos;
-    /* ·��ѹ��
+    /* 路径压缩
     register int newfa=getfa(nowroot,t[pos].fa);
     force_modify(nowroot,nowroot,1,n,t[pos].fa,t[newfa].fa);
     return newfa;
@@ -69,7 +69,7 @@ inline void merge(int x, int y, int &newroot, int old) {
         newroot = old;
         return;
     }
-    if (t[px].dep > t[py].dep) swap(px, py); //���Ⱥϲ� px -> py
+    if (t[px].dep > t[py].dep) swap(px, py); //按秩合并 px -> py
     modify(newroot, old, 1, n, t[px].fa, t[py].fa);
     if (t[px].dep == t[py].dep) adddep(newroot, 1, n, py);
 }

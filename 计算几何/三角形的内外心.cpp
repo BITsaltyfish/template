@@ -31,11 +31,11 @@ struct point {
 inline double dist(const point &a, const point &b) {
     return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
 }
-inline point get_neixin(const point &A, const point &B, const point &C) {
+inline point get_neixin(const point &A, const point &B, const point &C) {//内切圆圆心
     datatype a = dist(B, C), b = dist(A, C), c = dist(A, B);
     return (A * a + B * b + C * c) * (1.0 / (a + b + c));
 }
-inline point get_waixin(const point &A, const point &B, const point &C) {
+inline point get_waixin(const point &A, const point &B, const point &C) {//外接圆圆心
     datatype a1 = B.x - A.x, b1 = B.y - A.y, c1 = (a1 * a1 + b1 * b1) / 2;
     datatype a2 = C.x - A.x, b2 = C.y - A.y, c2 = (a2 * a2 + b2 * b2) / 2;
     datatype d = a1 * b2 - a2 * b1;

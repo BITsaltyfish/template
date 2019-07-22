@@ -1,4 +1,4 @@
-// µãÈ¨Ê½ - ÅäºÏÏß¶ÎÊ÷µÄµ¥µãĞŞ¸Ä+Çø¼ä²éÑ¯
+// ç‚¹æƒå¼ - é…åˆçº¿æ®µæ ‘çš„å•ç‚¹ä¿®æ”¹+åŒºé—´æŸ¥è¯¢
 struct Edge {
 	int to, next;
 	Edge() {}
@@ -16,7 +16,7 @@ void addedge(int u, int v) {
 	E[cnt].next = head[u];
 	head[u] = cnt++;
 }
-void dfs1(int u, int fa, int d) { // ´¦Àí³öÖØÁ´
+void dfs1(int u, int fa, int d) { // å¤„ç†å‡ºé‡é“¾
 	size[u] = 1; deep[u] = d; son[u] = 0;
 	for (int i = head[u]; ~i; i = E[i].next) {
 		int v = E[i].to;
@@ -37,7 +37,7 @@ void dfs2(int u, int first) {
 		if (v != pa[u] && v != son[u]) dfs2(v, v);
 	}
 }
-void solve(int u, int v) { // ÅÜLCAÍ¬Ê±¼ÆËã´ğ°¸
+void solve(int u, int v) { // è·‘LCAåŒæ—¶è®¡ç®—ç­”æ¡ˆ
 	int x = top[u], y = top[v], res = 0;
 	while (x != y) {
 		if (deep[x] < deep[y]) {
@@ -52,7 +52,7 @@ void solve(int u, int v) { // ÅÜLCAÍ¬Ê±¼ÆËã´ğ°¸
 	res += T.query(id[u], id[v], 1);
 	printf("%d\n", res);
 }
-// ±ßÈ¨Ê½£º°Ñ±ßÈ¨Æ«ÒÆµ½Éî¶È½Ï´óµÄµã£¬»¯³ÉµãÈ¨Ê½
+// è¾¹æƒå¼ï¼šæŠŠè¾¹æƒåç§»åˆ°æ·±åº¦è¾ƒå¤§çš„ç‚¹ï¼ŒåŒ–æˆç‚¹æƒå¼
 struct Point {
 	int from, to, val;
 } p[maxn];
@@ -110,8 +110,8 @@ int solve(int u, int v) {
 	if (u != v) ans += T.query(id[son[u]], id[v], 1);
 	return ans;
 }
-/* ÀıÌâ£ºPOJ 2763 - ¸øÒ»¿ÅÊ÷£¬±ßÖ®¼äÓĞÈ¨Öµ£¬Á½ÖÖ²Ù×÷
- *     µÚÒ»ÖÖ£ºÇóÈÎÒâÁ½µãµÄÈ¨ÖµºÍ£¬µÚ¶ş£¬ĞŞ¸ÄÊ÷ÉÏÁ½µãµÄÈ¨Öµ¡£
+/* ä¾‹é¢˜ï¼šPOJ 2763 - ç»™ä¸€é¢—æ ‘ï¼Œè¾¹ä¹‹é—´æœ‰æƒå€¼ï¼Œä¸¤ç§æ“ä½œ
+ *     ç¬¬ä¸€ç§ï¼šæ±‚ä»»æ„ä¸¤ç‚¹çš„æƒå€¼å’Œï¼Œç¬¬äºŒï¼Œä¿®æ”¹æ ‘ä¸Šä¸¤ç‚¹çš„æƒå€¼ã€‚
  */
  #include <bits/stdc++.h>
 using namespace std;

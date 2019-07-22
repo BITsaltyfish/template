@@ -1,5 +1,5 @@
-/* ====================Ò»Î¬==========================
- * addµ¥µãĞŞ¸Ä£¬askÇø¼äÇ°×ººÍ²éÑ¯£¬Èç¹û¸Ä³Éµ¥µã²éÑ¯Çø¼äĞŞ¸Ä add(x,z),add(y+1,-z)È»ºóask(t)
+/* ====================ä¸€ç»´==========================
+ * addå•ç‚¹ä¿®æ”¹ï¼ŒaskåŒºé—´å‰ç¼€å’ŒæŸ¥è¯¢ï¼Œå¦‚æœæ”¹æˆå•ç‚¹æŸ¥è¯¢åŒºé—´ä¿®æ”¹ add(x,z),add(y+1,-z)ç„¶åask(t)
  */
 #define mx 1000010
 ll c[mx];
@@ -12,27 +12,27 @@ inline ll ask(int x) {
     for (int i = x; i; i -= i & (-i))sum += c[i];
     return sum;
 }
-// ===================Ò»Î¬Çø¼äĞŞ¸Ä£¬Çø¼ä²éÑ¯===========================
+// ===================ä¸€ç»´åŒºé—´ä¿®æ”¹ï¼ŒåŒºé—´æŸ¥è¯¢===========================
 #define mx 1000010
 ll c1[mx], c2[mx];
 void modify(int x, int y) {
     for(int i = x; i < mx; i += i & (-i))c1[i] += y, c2[i] += (ll)x * y;
 }
-// ²î·ÖÊı×éÖĞÎ»ÖÃx¼ÓÉÏy
+// å·®åˆ†æ•°ç»„ä¸­ä½ç½®xåŠ ä¸Šy
 void add(int l, int r, int x) {
-    modify(l, x);    // Çø¼ä¼Óx
+    modify(l, x);    // åŒºé—´åŠ x
     modify(r + 1, -x);
 }
-ll ask(int x) { // ²éÑ¯Ç°×ººÍ
+ll ask(int x) { // æŸ¥è¯¢å‰ç¼€å’Œ
     ll ans(0);
     for(int i = x; i; i -= i & (-i)) ans += (ll)(x + 1) * c1[i] - c2[i];
     return ans;
 }
-// ===================¶şÎ¬Çø¼äĞŞ¸Ä£¬Çø¼ä²éÑ¯===========================
+// ===================äºŒç»´åŒºé—´ä¿®æ”¹ï¼ŒåŒºé—´æŸ¥è¯¢===========================
 #define y1 y1234
 #define mx 2060
 ll c1[mx][mx], c2[mx][mx], c3[mx][mx], c4[mx][mx];
-void modify(int x, int y, ll z) { // ²î·ÖÊı×éÖĞÎ»ÖÃ(x,y)¼ÓÉÏz
+void modify(int x, int y, ll z) { // å·®åˆ†æ•°ç»„ä¸­ä½ç½®(x,y)åŠ ä¸Šz
     for(int i = x; i < mx; i += i & -i) {
         for (int j = y; j < mx; j += j & -j) {
             c1[i][j] += z;
@@ -42,7 +42,7 @@ void modify(int x, int y, ll z) { // ²î·ÖÊı×éÖĞÎ»ÖÃ(x,y)¼ÓÉÏz
         }
     }
 }
-void add(int x1, int y1, int x2, int y2, ll x) { // Çø¼ä¼Óx
+void add(int x1, int y1, int x2, int y2, ll x) { // åŒºé—´åŠ x
     x2++;
     y2++;
     modify(x2, y2, x);
@@ -59,7 +59,7 @@ ll query(int x, int y) {
     }
     return ans;
 }
-ll ask(int x1, int y1, int x2, int y2) { //²éÑ¯Ç°×ººÍ
+ll ask(int x1, int y1, int x2, int y2) { //æŸ¥è¯¢å‰ç¼€å’Œ
     x1--;
     y1--;
     return query(x2, y2) - query(x1, y2) - query(x2, y1) + query(x1, y1);

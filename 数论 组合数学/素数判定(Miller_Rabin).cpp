@@ -1,5 +1,5 @@
-//使用is_prime(x)
-//切记：一定要用快速乘不能用普通乘,基本上是一定会爆ll
+//浣跨敤is_prime(x)
+//鍒囪锛氫竴瀹氳鐢ㄥ揩閫熶箻涓嶈兘鐢ㄦ櫘閫氫箻,鍩烘湰涓婃槸涓�瀹氫細鐖唋l
 ll mul(ll a, ll b, ll p) {
     if(b < 0)b = (b % p + p) % p;
     a %= p;

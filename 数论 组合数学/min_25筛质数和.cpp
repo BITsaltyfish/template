@@ -1,10 +1,10 @@
-/*±ØĞëÏÈµ÷ÓÃinit(),×¢ÒâmxÒª¿ª¹»
- *G(x,plen)·µ»Ø1~xµÄËùÓĞÖÊÊıÖ®ºÍ
+/*å¿…é¡»å…ˆè°ƒç”¨init(),æ³¨æ„mxè¦å¼€å¤Ÿ
+ *G(x,plen)è¿”å›1~xçš„æ‰€æœ‰è´¨æ•°ä¹‹å’Œ
  */
 #include <bits/stdc++.h>
 typedef long long ll;
 using namespace std;
-const int mx=1e6+5;//ÕâÀïmx=sqrt(n),1e6²»¹»µÄ»°»¹Òª¿ª´ó
+const int mx=1e6+5;//è¿™é‡Œmx=sqrt(n),1e6ä¸å¤Ÿçš„è¯è¿˜è¦å¼€å¤§
 int prime[mx/10],plen;
 bool isprime[mx];
 int psum[mx],pcount[mx],psum2[mx];

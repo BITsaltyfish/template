@@ -1,22 +1,22 @@
-// ÏßĞÔÉ¸ÄæÔª/½×³ËÄæÔª ÉÏÏŞ¶à´ó²Å¿ª¶à´ó£¬±ğMLEÁË
+// çº¿æ€§ç­›é€†å…ƒ/é˜¶ä¹˜é€†å…ƒ ä¸Šé™å¤šå¤§æ‰å¼€å¤šå¤§ï¼Œåˆ«MLEäº†
 const static int mx = 2e7 + 10;
-int inv[mx];// [0,mx)ÄæÔª
-int jc[mx], invjc[mx]; // 0!~(mx-1)!ÄæÔª
+int inv[mx];// [0,mx)é€†å…ƒ
+int jc[mx], invjc[mx]; // 0!~(mx-1)!é€†å…ƒ
 void init() {
-    //[0,mx)ÄæÔª
+    //[0,mx)é€†å…ƒ
     inv[0] = inv[1] = 1;
     int p, q;
     for (int i = 2; i < mx; i++) {
         p = mod / i, q = mod - p * i;
         inv[i] = 1ll * (mod - p) * inv[q] % mod;
     }
-    //0!~(mx-1)!¼°ÄæÔª
+    //0!~(mx-1)!åŠé€†å…ƒ
     jc[0] = 1;
     for (int i = 1; i < mx; i++)jc[i] = 1ll * jc[i - 1] * i % mod;
     invjc[mx - 1] = quickpow(jc[mx - 1], mod - 2, mod);
     for (int i = mx - 2; i >= 0; i--)invjc[i] = 1ll * invjc[i + 1] * (i + 1) % mod;
 }
-//ÏßĞÔÉ¸ËØÊı
+//çº¿æ€§ç­›ç´ æ•°
 const static int mx = 2e7 + 10;
 int prime[mx], len;
 bool isprime[mx];
@@ -32,7 +32,7 @@ void init() {
         }
     }
 }
-//ÏßĞÔÉ¸Å·À­º¯Êıphi
+//çº¿æ€§ç­›æ¬§æ‹‰å‡½æ•°phi
 const static int mx = 2e7 + 10;
 int prime[mx], phi[mx], len;
 void init() {
@@ -49,7 +49,7 @@ void init() {
         }
     }
 }
-//ÏßĞÔÉ¸Äª±ÈÎÚË¹º¯Êımu
+//çº¿æ€§ç­›è«æ¯”ä¹Œæ–¯å‡½æ•°mu
 const static int mx = 2e7 + 10;
 int prime[mx], mu[mx], len;
 bool mrk[mx];
@@ -67,21 +67,21 @@ void init() {
         }
     }
 }
-//ÏßĞÔÉ¸ÈÎÒâ»ıĞÔº¯Êı£¨ĞèÒªÄÜ¹»¿ìËÙÇó³öËØÊıÃİµÄº¯ÊıÖµf[p^k]£©
+//çº¿æ€§ç­›ä»»æ„ç§¯æ€§å‡½æ•°ï¼ˆéœ€è¦èƒ½å¤Ÿå¿«é€Ÿæ±‚å‡ºç´ æ•°å¹‚çš„å‡½æ•°å€¼f[p^k]ï¼‰
 const static int mx = 2e7 + 10;
 int prime[mx], dprime[mx], f[mx], len;
-//dprime[i]ÊÇiµÄ×îĞ¡ÖÊÒò×Ó²¿·Ö£¬¿ÉÄÜ²»ÊÇ×îĞ¡ÖÊÒò×Óp£¬¶øÊÇp^k
+//dprime[i]æ˜¯içš„æœ€å°è´¨å› å­éƒ¨åˆ†ï¼Œå¯èƒ½ä¸æ˜¯æœ€å°è´¨å› å­pï¼Œè€Œæ˜¯p^k
 void init() {
     f[0] = 0;
     f[1] = 1;
     for (int i = 2; i < mx; i++) {
         if(!dprime[i])dprime[i] = prime[++len] = i, f[i] =;
-        //fÈ¡Öµ×Ô¼ºËã£¬ÕâÀïiÊÇÖÊÊı
+        //få–å€¼è‡ªå·±ç®—ï¼Œè¿™é‡Œiæ˜¯è´¨æ•°
         for (int j = 1; j <= len && i * prime[j] < mx; j++) {
             if (i % prime[j] == 0) {
                 dprime[i * prime[j]] = dprime[i] * prime[j];
                 if(dprime[i] == i)f[i * prime[j]] =;
-                //ÕâÀïi*prime[j]ÊÇprime[j]^k,i=prime[j]^(k-1)
+                //è¿™é‡Œi*prime[j]æ˜¯prime[j]^k,i=prime[j]^(k-1)
                 else f[i * prime[j]] = f[i / dprime[i]] * f[dprime[i] * prime[j]];
                 break;
             }
@@ -91,82 +91,25 @@ void init() {
     }
 }
 
-//ÏßĞÔÉ¸ÄæÔª
+//çº¿æ€§ç­›é€†å…ƒ
 for(int i = 2; i < p; i++)inv[i] = 1ll * (p - p / i) * inv[p % i] % p;
-//ÏßĞÔÉ¸Å·À­º¯Êı
-int mrk[1000010], prime[1000001], phi[1000010];
-void getphi(int N) {
-    int i, j;
-    phi[1] = 1;
-    int tot = 0;
-    for(i = 2; i <= N; i++) { //Ïàµ±ÓÚ·Ö½âÖÊÒòÊ½µÄÄæ¹ı³Ì
-        if(!mrk[i]) {
-            prime[++tot] = i; //É¸ËØÊıµÄÊ±ºòÊ×ÏÈ»áÅĞ¶ÏiÊÇ·ñÊÇËØÊı¡£
-            phi[i] = i - 1; //µ± i ÊÇËØÊıÊ± phi[i]=i-1
-        }
-        for(j = 1; j <= tot; j++) {
-            if(i * prime[j] > N)  break;
-            mrk[i * prime[j]] = 1; //È·¶¨i*prime[j]²»ÊÇËØÊı
-            if(i % prime[j] == 0) { //½Ó×ÅÎÒÃÇ»á¿´prime[j]ÊÇ·ñÊÇiµÄÔ¼Êı
-                phi[i * prime[j]] = phi[i] * prime[j];
-                break;
-            } else
-                phi[i * prime[j]] = phi[i] * (prime[j] - 1); //ÆäÊµÕâÀïprime[j]-1¾ÍÊÇphi[prime[j]]£¬ÀûÓÃÁËÅ·À­º¯ÊıµÄ»ıĞÔ
-        }
-    }
-}
-//ÏßĞÔÉ¸Äª±ÈÎÚË¹º¯Êı
-int mu[1000010];
-void getmu(int N) {
-    int cnt = 0;
-    mu[1] = 1;
-    for (int i = 2; i <= N ; ++i) {
-        if(!vis[i]) {
-            prime[cnt++] = i;
-            mu[i] = -1;
-        }
-        for (int j = 0; j < cnt && i * prime[j] <= N ; ++j) {
-            vis[i * prime[j]] = true;
-            if(i % prime[j]) mu[i * prime[j]] = -mu[i];
-            else {
-                mu[i * prime[j]] = 0;
-                break;
-            }
-        }
-    }
-}
-//ÏßĞÔÉ¸ËØÊı
-#define MAXL 1299710
-int prime[1000010];
-int mrk[1000010];
-void getprime(int N) {
-    int tot = 0;
-    memset(mrk, 0, sizeof(mrk));
-    for (int i = 2; i <= N; ++i) {
-        if (!mrk[i])prime[++tot] = i;
-        for (int j = 1; j <= tot; ++j) {
-            if (i * prime[j] > N)break;
-            mrk[i * prime[j]] = 1;
-            if (i % prime[j] == 0)break;
-        }
-    }
-}
-//n sqrt(n) ²ğ·ÖÊı
+
+//n sqrt(n) æ‹†åˆ†æ•°
 const int mod = 1e9 + 7;
 void inc(int &x, int y) {
-    x = x + y >= mod ? x + y©\mod : x + y;
+    x = x + y >= mod ? x + y - mod : x + y;
 }
 void dec(int &x, int y) {
-    x = x©\y < 0 ? x©\y + mod : x©\y;
+    x = x - y < 0 ? x - y + mod : x - y;
 }
 void getchaifen(int N) {
     f[0] = 1;
     for(int i = 1; i <= N; i++) {
         for(int j = 1, w = 1; w <= i; w += 3 * j + 1, j++)
-            if(j & 1)inc(f[i], f[i©\w]);
-            else dec(f[i], f[i©\w]);
+            if(j & 1)inc(f[i], f[i-w]);
+            else dec(f[i], f[i-w]);
         for(int j = 1, w = 2; w <= i; w += 3 * j + 2, j++)
-            if(j & 1)inc(f[i], f[i©\w]);
-            else dec(f[i], f[i©\w]);
+            if(j & 1)inc(f[i], f[i-w]);
+            else dec(f[i], f[i-w]);
     }
 }
